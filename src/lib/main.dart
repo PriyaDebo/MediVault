@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MediVault',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
+        primarySwatch: Colors.deepPurple,
         scaffoldBackgroundColor: Colors.white,
       ),
       home: SplashScreen(),

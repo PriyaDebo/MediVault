@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:medivault/constants.dart';
-import 'package:medivault/screens/InformationFirst/information_first.dart';
+import 'package:medivault/screens/Onboarding/onboarding.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Body extends StatefulWidget {
@@ -19,7 +19,7 @@ class _BodyState extends State<Body> {
     Timer(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => InformationFirst()),
+        MaterialPageRoute(builder: (context) => Onboarding()),
       );
     });
   }
@@ -42,10 +42,7 @@ class _BodyState extends State<Body> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset("assets/images/logo.png", height: size.height * 0.15, width: size.height * 0.8,),
-                            Text(
-                                  'MEDIVAULT',
-                                  style: GoogleFonts.monoton(fontSize: size.height * 0.04, color: kDarkSlateBlue),
-                                ),
+                            Text('MEDIVAULT', style: GoogleFonts.figtree(fontSize: size.height * 0.04, color: kDarkSlateBlue)),
                           ]
                       )
                   ),
