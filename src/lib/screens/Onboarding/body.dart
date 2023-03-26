@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:medivault/all_components/background.dart';
 import 'package:medivault/constants.dart';
 import 'package:medivault/screens/Onboarding/content_model.dart';
-import 'package:medivault/screens/SplashScreen/splash_screen.dart';
+import 'package:medivault/screens/Registration/registration.dart';
 
 class Body extends StatefulWidget {
   Body();
@@ -13,6 +13,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
   int currentIndex = 0;
   late PageController _controller;
 
@@ -101,7 +102,7 @@ class _BodyState extends State<Body> {
                 if (currentIndex == contents.length - 1) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => SplashScreen()),
+                    MaterialPageRoute(builder: (_) => Registration()),
                   );
                 }
                 _controller.nextPage(
