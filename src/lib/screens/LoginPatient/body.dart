@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medivault/screens/HomePatient/home_patient.dart';
 
+import '../../all_components/BottomNavigationPatient/bottom_navigation_patient.dart';
 import '../../all_components/background.dart';
 import '../../all_components/round_input_field.dart';
 import '../../all_components/rounded_button.dart';
@@ -100,7 +101,7 @@ class _BodyState extends State<Body> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomePatient(),
+                              builder: (context) => BottomNavigationPatient(),
                             ));
                       },
                       color: kDarkSlateBlue,

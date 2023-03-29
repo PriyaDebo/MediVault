@@ -7,6 +7,7 @@ import 'package:medivault/screens/HomePatient/home_patient.dart';
 import 'package:medivault/screens/LoginHospital/login_hospital.dart';
 import 'package:medivault/screens/LoginPatient/login_patient.dart';
 
+import '../../all_components/BottomNavigationPatient/bottom_navigation_patient.dart';
 import '../../all_components/background.dart';
 import '../../constants.dart';
 
@@ -136,7 +137,7 @@ class _BodyState extends State<Body> {
                     if (checkValidityPatient(username, password, context)) {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (_) => HomePatient()),
+                        MaterialPageRoute(builder: (_) => BottomNavigationPatient()),
                       );
                     }
                   }
