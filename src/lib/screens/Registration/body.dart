@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medivault/all_components/BottomNavigationHospital/bottom_navigation_hospital.dart';
 import 'package:medivault/all_components/round_input_field.dart';
 import 'package:medivault/screens/HomeHospital/home_hospital.dart';
 import 'package:medivault/screens/HomePatient/home_patient.dart';
 import 'package:medivault/screens/LoginHospital/login_hospital.dart';
 import 'package:medivault/screens/LoginPatient/login_patient.dart';
 
+import '../../all_components/BottomNavigationPatient/bottom_navigation_patient.dart';
 import '../../all_components/background.dart';
 import '../../constants.dart';
 
@@ -125,7 +127,7 @@ class _BodyState extends State<Body> {
                     if (checkValidityHospital(email, password, context)) {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (_) => HomeHospital()),
+                        MaterialPageRoute(builder: (_) => BottomNavigationHospital()),
                       );
                     }
                   }
@@ -135,7 +137,7 @@ class _BodyState extends State<Body> {
                     if (checkValidityPatient(username, password, context)) {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (_) => HomePatient()),
+                        MaterialPageRoute(builder: (_) => BottomNavigationPatient()),
                       );
                     }
                   }
@@ -180,7 +182,7 @@ class _BodyState extends State<Body> {
             "Select Account Type",
             style: GoogleFonts.poppins(
                 color: kDarkSlateBlue,
-                fontSize: height * 0.04,
+                fontSize: height * 0.03,
                 fontWeight: FontWeight.w900),
             textAlign: TextAlign.center,
           ),
@@ -209,7 +211,7 @@ class _BodyState extends State<Body> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset("assets/images/hospital.png", height: height*0.2,width: width*0.4,),
+                Image.asset("assets/images/hospital.png", height: height*0.15,width: width*0.4,),
                 SizedBox(width: width*0.03,),
                 Expanded (
                   child: Column(
@@ -253,7 +255,7 @@ class _BodyState extends State<Body> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset("assets/images/patient.png", height: height*0.2,width: width*0.4,),
+                Image.asset("assets/images/patient.png", height: height*0.15,width: width*0.4,),
                 SizedBox(width: width*0.03,),
                 Expanded (
                   child: Column(
@@ -326,7 +328,7 @@ class _BodyState extends State<Body> {
               children: <Widget>[
                 Text(
                   "Already have an account? ",
-                  style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue), fontSize: height * 0.025),
+                  style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue), fontSize: height * 0.02),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -338,7 +340,7 @@ class _BodyState extends State<Body> {
                   },
                   child: Text(
                     "SIGN IN",
-                    style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue, fontWeight: FontWeight.w600), fontSize: height * 0.025),
+                    style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue, fontWeight: FontWeight.w600), fontSize: height * 0.02),
                   ),
                 ),
               ],
@@ -520,7 +522,7 @@ class _BodyState extends State<Body> {
                   children: <Widget>[
                     Text(
                       "Already have an account? ",
-                      style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue), fontSize: height * 0.025),
+                      style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue), fontSize: height * 0.02),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -532,7 +534,7 @@ class _BodyState extends State<Body> {
                       },
                       child: Text(
                         "SIGN IN",
-                        style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue, fontWeight: FontWeight.w600), fontSize: height * 0.025),
+                        style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue, fontWeight: FontWeight.w600), fontSize: height * 0.02),
                       ),
                     ),
                   ],
