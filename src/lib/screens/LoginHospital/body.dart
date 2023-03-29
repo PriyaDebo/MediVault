@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:medivault/screens/HomeHospital/home_hospital.dart';
 import 'package:medivault/screens/Registration/registration.dart';
 
+import '../../all_components/BottomNavigationHospital/bottom_navigation_hospital.dart';
 import '../../all_components/background.dart';
 import '../../all_components/round_input_field.dart';
 import '../../all_components/rounded_button.dart';
@@ -70,7 +71,7 @@ class _BodyState extends State<Body> {
                       children: <Widget>[
                         Text(
                           "Don't have an account? ",
-                          style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue), fontSize: height * 0.025),
+                          style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue), fontSize: height * 0.02),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -82,7 +83,7 @@ class _BodyState extends State<Body> {
                           },
                           child: Text(
                             "REGISTER",
-                            style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue, fontWeight: FontWeight.w600), fontSize: height * 0.025),
+                            style: GoogleFonts.comfortaa(textStyle: TextStyle(color: kDarkSlateBlue, fontWeight: FontWeight.w600), fontSize: height * 0.02),
                           ),
                         ),
                       ],
@@ -95,7 +96,7 @@ class _BodyState extends State<Body> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomeHospital(),
+                                builder: (context) => BottomNavigationHospital(),
                               ));
                         },
                         color: kDarkSlateBlue,

@@ -63,6 +63,7 @@ class _BodyState extends State<Body> {
                   controller: passwordController,
                   isObscure: false,
                 ),
+                SizedBox(height: height * 0.01),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -70,7 +71,7 @@ class _BodyState extends State<Body> {
                       "Don't have an account? ",
                       style: GoogleFonts.comfortaa(
                           textStyle: TextStyle(color: kDarkSlateBlue),
-                          fontSize: height * 0.025),
+                          fontSize: height * 0.02),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -86,7 +87,7 @@ class _BodyState extends State<Body> {
                             textStyle: TextStyle(
                                 color: kDarkSlateBlue,
                                 fontWeight: FontWeight.w600),
-                            fontSize: height * 0.025),
+                            fontSize: height * 0.02),
                       ),
                     ),
                   ],
