@@ -14,9 +14,11 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     double height = size.height;
     double width = size.width;
+
     return Background(
       child: Scaffold(
           body: Container(
