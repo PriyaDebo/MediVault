@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medivault/all_components/round_input_field.dart';
 import 'package:medivault/all_components/rounded_button.dart';
+import 'package:medivault/operations/report_bl.dart';
 
 import '../../all_components/background.dart';
 import '../../constants.dart';
@@ -17,6 +18,8 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
+  DateTime date = DateTime.now();
 
   final TextEditingController _patientId = new TextEditingController();
 
@@ -49,62 +52,139 @@ class _BodyState extends State<Body> {
     }
   }
 
+  void _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2015),
+      lastDate: DateTime.now(),
+    ).then((value) {
+      setState(() {
+        date = value!;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     double height = size.height;
     double width = size.width;
     return Background(
         child: Scaffold(
             body: Container(
-              padding: EdgeInsets.all(height * 0.05),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      "Add Reports",
-                      style: GoogleFonts.poppins(
-                          color: kDarkSlateBlue,
-                          fontSize: height * 0.04,
-                          fontWeight: FontWeight.w700),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: height * 0.01),
-                    Text(
-                      "Add medical reports easily to patient's account by providing the Patient Id and attaching the medical report in PDF format.",
-                      style: GoogleFonts.poppins(
-                          color: kRaisinBlack, fontSize: height * 0.02),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: height * 0.01),
-                    RoundInputField(
-                        hintText: "Patient Id",
-                        icon: Icons.person,
-                        onChanged: (value) {},
-                        isObscure: false
-                    ),
-                    SizedBox(height: height * 0.02),
-                    RoundButton(
+                padding: EdgeInsets.all(height * 0.05),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "Add Reports",
+                        style: GoogleFonts.poppins(
+                            color: kDarkSlateBlue,
+                            fontSize: height * 0.04,
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: height * 0.01),
+                      Text(
+                        "Add medical reports easily to patient's account by providing the Patient Id and attaching the medical report in PDF format.",
+                        style: GoogleFonts.poppins(
+                            color: kRaisinBlack, fontSize: height * 0.02),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: height * 0.01),
+                      RoundInputField(
+                          hintText: "Patient Id",
+                          icon: Icons.person,
+                          onChanged: (value) {},
+                          isObscure: false
+                      ),
+                      SizedBox(height: height * 0.02),
+                      RoundButton(
+                        text: "Select Date",
+                        press: _openFileExplorer,
+                      ),
+                      SizedBox(height: height * 0.02),
+                      RoundButton(
                         text: "Attach PDF",
                         press: _openFileExplorer,
-                    ),
-                    SizedBox(height: height * 0.02),
-                    RoundButton(
-                      text: "SUBMIT",
-                      press: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Submit the form with the patient ID and PDF file
-                          // You can send the PDF file to an API using a package like http or dio
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              )
+                      ),
+                      SizedBox(height: height * 0.02),
+                      RoundButton(
+                        text: "SUBMIT",
+                        press: () async {
+                          final patientId = _patientId.text.trim();
+                          final file = getFileBytes(_pdfFile);
+                          final dateString = date.toString();
+                          if (checkValidityHospital(patientId, dateString, file as List<int>, context)) {
+                            final result = await ReportBl().reportUpload(patientId, file as List<int>, dateString);
+                            if (result == "FAIL") {
+                              final snackBar = SnackBar(
+                                content: Text("Failed to add report", style: GoogleFonts.lora(),),
+                                duration: Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+                            else {
+                              final snackBar = SnackBar(
+                                content: Text("Report Added Successfully", style: GoogleFonts.lora(),),
+                                duration: Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                )
             )
         )
     );
+  }
+
+  bool checkValidityHospital(String patientId, String date, List<int> file,
+      context) {
+    if (patientId.isEmpty) {
+      final snackBar = SnackBar(
+        content: Text(
+          "Patient ID Required",
+          style: GoogleFonts.lora(),
+        ),
+        duration: Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return false;
+    } else if (date.isEmpty) {
+      final snackBar = SnackBar(
+        content: Text(
+          "Date required",
+          style: GoogleFonts.lora(),
+        ),
+        duration: Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return false;
+    } else if (file.isEmpty) {
+      final snackBar = SnackBar(
+        content: Text(
+          "Please attach file.",
+          style: GoogleFonts.lora(),
+        ),
+        duration: Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return false;
+    }
+    return true;
   }
 }
