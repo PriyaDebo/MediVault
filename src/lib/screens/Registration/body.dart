@@ -120,10 +120,14 @@ class _BodyState extends State<Body> {
               onPressed: () async {
                 if (currentIndex == _formData.length - 1) {
                   if (_formData[0]['account'] == 'Hospital') {
-                    final password = passwordController.text.trim();
+                    final password = hospitalPasswordController.text.trim();
                     final name = nameController.text.trim();
                     final contact = phoneController.text.trim();
                     if (checkValidityHospital(name, password, contact, context)) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (_) => BottomNavigationHospital()),
+                      );
                       final result = await HospitalBl().validRegister(name, password, contact);
                       if (result != "FAIL") {
                         Navigator.pushReplacement(
@@ -613,7 +617,7 @@ class _BodyState extends State<Body> {
     if (email.isEmpty) {
       final snackBar = SnackBar(
         content: Text(
-          "Email Required",
+          "Name Required",
           style: GoogleFonts.lora(),
         ),
         duration: Duration(seconds: 2),

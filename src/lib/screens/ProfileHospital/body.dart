@@ -50,7 +50,7 @@ class _BodyState extends State<Body> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Name: $Placeholder",
+                                    "Hospital ID: MH123_hos",
                                     style: GoogleFonts.poppins(
                                         color: kDarkSlateBlue,
                                         fontSize: height * 0.025,
@@ -66,7 +66,7 @@ class _BodyState extends State<Body> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Email: $Placeholder",
+                                    "Name: Medical Hospital",
                                     style: GoogleFonts.poppins(
                                         color: kDarkSlateBlue,
                                         fontSize: height * 0.025,
@@ -81,15 +81,15 @@ class _BodyState extends State<Body> {
                       ),
                     ),
 
-                    SizedBox(height: height * 0.01),
-                    Text(
-                      "Patient Details ",
-                      style: GoogleFonts.poppins(
-                          color: kDarkSlateBlue,
-                          fontSize: height * 0.035,
-                          fontWeight: FontWeight.w600),
-                      textAlign: TextAlign.center,
-                    ),
+                    // SizedBox(height: height * 0.01),
+                    // Text(
+                    //   "Patient Details ",
+                    //   style: GoogleFonts.poppins(
+                    //       color: kDarkSlateBlue,
+                    //       fontSize: height * 0.035,
+                    //       fontWeight: FontWeight.w600),
+                    //   textAlign: TextAlign.center,
+                    // ),
                     SizedBox(height: height * 0.01),
                   ]
               )

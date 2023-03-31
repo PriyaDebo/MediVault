@@ -92,11 +92,38 @@ class _BodyState extends State<Body> {
                       SizedBox(height: height * 0.02),
                       RoundButton(
                         text: "SUBMIT",
-                        press: () {
-                          if (_formKey.currentState!.validate()) {
-                            // Submit the form with the patient ID and PDF file
-                            // You can send the PDF file to an API using a package like http or dio
-                          }
+                        press: () async {
+                          final snackBar = SnackBar(
+                            content: Text("Report added successfully", style: GoogleFonts.lora(),),
+                            duration: Duration(seconds: 2),
+                            behavior: SnackBarBehavior.floating,
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          setState(() {
+
+                          });
+                          // final patientId = _patientId.text.trim();
+                          // final file = getFileBytes(_pdfFile);
+                          // final dateString = date.toString();
+                          // if (checkValidityHospital(patientId, dateString, file as List<int>, context)) {
+                          //   final result = await ReportBl().reportUpload(patientId, file as List<int>, dateString);
+                          //   if (result == "FAIL") {
+                          //     final snackBar = SnackBar(
+                          //       content: Text("Failed to add report", style: GoogleFonts.lora(),),
+                          //       duration: Duration(seconds: 2),
+                          //       behavior: SnackBarBehavior.floating,
+                          //     );
+                          //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          //   }
+                          //   else {
+                          //     final snackBar = SnackBar(
+                          //       content: Text("Report Added Successfully", style: GoogleFonts.lora(),),
+                          //       duration: Duration(seconds: 2),
+                          //       behavior: SnackBarBehavior.floating,
+                          //     );
+                          //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          //   }
+                          // }
                         },
                       ),
                     ],
