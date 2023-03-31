@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medivault/all_components/BottomNavigationHospital/bottom_navigation_hospital.dart';
 import 'package:medivault/all_components/round_input_field.dart';
+import 'package:medivault/operations/hospital_bl.dart';
 import 'package:medivault/screens/HomeHospital/home_hospital.dart';
 import 'package:medivault/screens/HomePatient/home_patient.dart';
 import 'package:medivault/screens/LoginHospital/login_hospital.dart';
@@ -37,7 +38,6 @@ class _BodyState extends State<Body> {
   List<Map<String, String>> _formData = [
     {'account': ''},
     {'username': '', 'password': '', 'gender': '', 'age': ''},
-    {'gender': ''},
   ];
 
   String? _genderValue = '';
@@ -88,8 +88,6 @@ class _BodyState extends State<Body> {
                       return selectAccount(height, width);
                     case 1:
                       return _formData[0]['account'] == 'Hospital' ? fillHospitalDetails(height, width) : fillPatientDetails(height, width);
-                    case 2:
-                      return _formData[0]['account'] == 'Hospital' ? fillMoreHospitalDetails(height, width) : addMorePatientDetails(height, width);
                     default:
                       return Container();
                   }
@@ -119,16 +117,28 @@ class _BodyState extends State<Body> {
                     fontSize: size.height * 0.03, color: kLavenderBlush),
                 textAlign: TextAlign.center,
               ),
-              onPressed: () {
+              onPressed: () async {
                 if (currentIndex == _formData.length - 1) {
                   if (_formData[0]['account'] == 'Hospital') {
-                    final email = emailController.text.trim();
                     final password = passwordController.text.trim();
-                    if (checkValidityHospital(email, password, context)) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => BottomNavigationHospital()),
-                      );
+                    final name = nameController.text.trim();
+                    final contact = phoneController.text.trim();
+                    if (checkValidityHospital(name, password, contact, context)) {
+                      final result = await HospitalBl().validRegister(name, password, contact);
+                      if (result != "FAIL") {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => BottomNavigationHospital()),
+                        );
+                      }
+                      else {
+                        final snackBar = SnackBar(
+                          content: Text("Registration Failed", style: GoogleFonts.lora(),),
+                          duration: Duration(seconds: 2),
+                          behavior: SnackBarBehavior.floating,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
                     }
                   }
                   else {
@@ -502,10 +512,10 @@ class _BodyState extends State<Body> {
                 ),
                 SizedBox(height: height * 0.01),
                 RoundInputField(
-                  hintText: "Email",
-                  icon: Icons.mail,
+                  hintText: "Name",
+                  icon: Icons.home,
                   onChanged: (value) {},
-                  controller: emailController,
+                  controller: nameController,
                   isObscure: false,
                 ),
                 SizedBox(height: height * 0.01),
@@ -514,6 +524,15 @@ class _BodyState extends State<Body> {
                   icon: Icons.lock,
                   onChanged: (value) {},
                   controller: hospitalPasswordController,
+                  isObscure: false,
+                ),
+                SizedBox(height: height * 0.01),
+                RoundInputField(
+                  hintText: "Contact",
+                  icon: Icons.phone,
+                  onChanged: (value) {},
+                  keyboardType: TextInputType.number,
+                  controller: phoneController,
                   isObscure: false,
                 ),
                 SizedBox(height: height * 0.01),
@@ -590,7 +609,7 @@ class _BodyState extends State<Body> {
     );
   }
 
-  bool checkValidityHospital(String email, String password, context) {
+  bool checkValidityHospital(String email, String password, String contact, context) {
     if (email.isEmpty) {
       final snackBar = SnackBar(
         content: Text(
@@ -606,6 +625,17 @@ class _BodyState extends State<Body> {
       final snackBar = SnackBar(
         content: Text(
           "Password required",
+          style: GoogleFonts.lora(),
+        ),
+        duration: Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      return false;
+    } else if (contact.isEmpty) {
+      final snackBar = SnackBar(
+        content: Text(
+          "Contact required",
           style: GoogleFonts.lora(),
         ),
         duration: Duration(seconds: 2),
