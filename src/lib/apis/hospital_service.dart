@@ -11,9 +11,9 @@ class HospitalService {
   final header = <String, String>{'Content-Type': 'application/json; charset=UTF-8',};
 
   Future<http.Response> registerHospital(String name, String password, String contact) async{
-    var hospital = new HospitalModel(null, name, password, contact);
+    var hospital = new HospitalModel(null, name, password, contact, "");
     final uri = uriLink + "/store-hospital-details";
-    final response = await http.post(
+    final response = await http.put(
       Uri.parse(uri),
       headers: header,
       body: jsonEncode(hospital.toJson()),
