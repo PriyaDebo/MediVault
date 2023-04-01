@@ -8,7 +8,7 @@ class HospitalBl {
   Future<String> validRegister(String name, String password, String contact) async {
     final res = await hospitalService.registerHospital(name, password, contact);
     if (res.statusCode == 200) {
-      final response =jsonDecode(res.body);
+      final response = jsonDecode(res.body);
       return response.id.toString();
     }
 

@@ -22,7 +22,7 @@ class PatientService {
     return response;
   }
 
-  Future<http.Response> loginHospital(String id, String password) async{
+  Future<http.Response> loginPatient(String id, String password) async{
     var login = new LoginModel('P', id, password);
     final uri = uriLink + "/login";
     final response = await http.post(
