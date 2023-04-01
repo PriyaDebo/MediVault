@@ -47,8 +47,8 @@ class _BodyState extends State<Body> {
     if (result != null) {
       setState(() async {
         _pdfFile = File(result.files.single.path!);
-        File pdfFile = File('/path/to/pdf/file.pdf');
-        List<int>? pdfBytes = await getFileBytes(pdfFile);
+        // File pdfFile = File('/path/to/pdf/file.pdf');
+        // List<int>? pdfBytes = await getFileBytes(pdfFile);
       });
     }
   }
@@ -72,7 +72,6 @@ class _BodyState extends State<Body> {
         .of(context)
         .size;
     double height = size.height;
-    double width = size.width;
     return Background(
         child: Scaffold(
             body: Container(
@@ -104,11 +103,11 @@ class _BodyState extends State<Body> {
                           onChanged: (value) {},
                           isObscure: false
                       ),
-                      // SizedBox(height: height * 0.02),
-                      // RoundButton(
-                      //   text: "Select Date",
-                      //   press: _showDatePicker,
-                      // ),
+                      SizedBox(height: height * 0.02),
+                      RoundButton(
+                        text: "Select Date",
+                        press: _showDatePicker,
+                      ),
                       SizedBox(height: height * 0.02),
                       RoundButton(
                         text: "Attach PDF",
@@ -118,37 +117,28 @@ class _BodyState extends State<Body> {
                       RoundButton(
                         text: "SUBMIT",
                         press: () async {
-                          final snackBar = SnackBar(
-                            content: Text("Report added successfully", style: GoogleFonts.lora(),),
-                            duration: Duration(seconds: 2),
-                            behavior: SnackBarBehavior.floating,
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          setState(() {
-
-                          });
-                          // final patientId = _patientId.text.trim();
-                          // final file = getFileBytes(_pdfFile);
-                          // final dateString = date.toString();
-                          // if (checkValidityHospital(patientId, dateString, file as List<int>, context)) {
-                          //   final result = await ReportBl().reportUpload(patientId, file as List<int>, dateString);
-                          //   if (result == "FAIL") {
-                          //     final snackBar = SnackBar(
-                          //       content: Text("Failed to add report", style: GoogleFonts.lora(),),
-                          //       duration: Duration(seconds: 2),
-                          //       behavior: SnackBarBehavior.floating,
-                          //     );
-                          //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          //   }
-                          //   else {
-                          //     final snackBar = SnackBar(
-                          //       content: Text("Report Added Successfully", style: GoogleFonts.lora(),),
-                          //       duration: Duration(seconds: 2),
-                          //       behavior: SnackBarBehavior.floating,
-                          //     );
-                          //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          //   }
-                          // }
+                          final patientId = _patientId.text.trim();
+                          final file = await getFileBytes(_pdfFile);
+                          final dateString = date.toString();
+                          if (checkValidityHospital(patientId, dateString, file, context)) {
+                            final result = await ReportBl().reportUpload(patientId, file, dateString);
+                            if (result == "FAIL") {
+                              final snackBar = SnackBar(
+                                content: Text("Failed to add report", style: GoogleFonts.lora(),),
+                                duration: Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+                            else {
+                              final snackBar = SnackBar(
+                                content: Text("Report Added Successfully", style: GoogleFonts.lora(),),
+                                duration: Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+                          }
                         },
                       ),
                     ],
@@ -159,12 +149,11 @@ class _BodyState extends State<Body> {
     );
   }
 
-  bool checkValidityHospital(String patientId, String date, List<int> file,
-      context) {
+  bool checkValidityHospital(String patientId, String date, List<int> file, context) {
     if (patientId.isEmpty) {
       final snackBar = SnackBar(
         content: Text(
-          "Patient ID Required",
+          "Patient MediVault ID Required.",
           style: GoogleFonts.lora(),
         ),
         duration: Duration(seconds: 2),
@@ -175,7 +164,7 @@ class _BodyState extends State<Body> {
     } else if (date.isEmpty) {
       final snackBar = SnackBar(
         content: Text(
-          "Date required",
+          "Date required.",
           style: GoogleFonts.lora(),
         ),
         duration: Duration(seconds: 2),

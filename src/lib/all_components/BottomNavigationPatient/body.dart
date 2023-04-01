@@ -23,7 +23,7 @@ class _BottomNavigationState extends State<BottomNavigationBody> {
   void initState() {
     super.initState();
     _selectedPageIndex = 0;
-    _pages = [Analysis(), HomePatient(), ProfilePatient(widget.id)];
+    _pages = [Analysis(), HomePatient(widget.id), ProfilePatient(widget.id)];
     _pageController = PageController(initialPage: _selectedPageIndex);
   }
 
