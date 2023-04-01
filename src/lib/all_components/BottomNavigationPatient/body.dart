@@ -6,8 +6,9 @@ import 'package:medivault/screens/HomePatient/home_patient.dart';
 import 'package:medivault/screens/ProfilePatient/profile_patient.dart';
 
 class BottomNavigationBody extends StatefulWidget {
+  final String id;
 
-  BottomNavigationBody();
+  BottomNavigationBody(this.id);
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
@@ -22,7 +23,7 @@ class _BottomNavigationState extends State<BottomNavigationBody> {
   void initState() {
     super.initState();
     _selectedPageIndex = 0;
-    _pages = [Analysis(), HomePatient(), ProfilePatient()];
+    _pages = [Analysis(), HomePatient(), ProfilePatient(widget.id)];
     _pageController = PageController(initialPage: _selectedPageIndex);
   }
 

@@ -5,7 +5,8 @@ import '../../all_components/background.dart';
 import '../../constants.dart';
 
 class Body extends StatefulWidget {
-  Body();
+  final String id;
+  Body(this.id);
 
   @override
   _BodyState createState() => _BodyState();
@@ -17,7 +18,6 @@ class _BodyState extends State<Body> {
 
     Size size = MediaQuery.of(context).size;
     double height = size.height;
-    double width = size.width;
 
     return Background(
       child: Scaffold(
@@ -50,7 +50,7 @@ class _BodyState extends State<Body> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Hospital ID: MH123_hos",
+                                    "Hospital ID: ${widget.id}",
                                     style: GoogleFonts.poppins(
                                         color: kDarkSlateBlue,
                                         fontSize: height * 0.025,

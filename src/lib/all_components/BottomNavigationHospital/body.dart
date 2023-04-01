@@ -5,8 +5,9 @@ import 'package:medivault/screens/HomeHospital/home_hospital.dart';
 import 'package:medivault/screens/ProfileHospital/profile_hospital.dart';
 
 class BottomNavigationBody extends StatefulWidget {
+  final String id;
 
-  BottomNavigationBody();
+  BottomNavigationBody(this.id);
   @override
   _BottomNavigationState createState() => _BottomNavigationState();
 }
@@ -21,7 +22,7 @@ class _BottomNavigationState extends State<BottomNavigationBody> {
   void initState() {
     super.initState();
     _selectedPageIndex = 0;
-    _pages = [HomeHospital(), ProfileHospital()];
+    _pages = [HomeHospital(), ProfileHospital(widget.id)];
     _pageController = PageController(initialPage: _selectedPageIndex);
   }
 

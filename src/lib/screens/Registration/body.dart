@@ -135,7 +135,7 @@ class _BodyState extends State<Body> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => BottomNavigationHospital()),
+                                  builder: (_) => BottomNavigationHospital(result)),
                             );
                           } else {
                             final snackBar = SnackBar(
@@ -162,7 +162,7 @@ class _BodyState extends State<Body> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => BottomNavigationPatient()),
+                                  builder: (_) => BottomNavigationPatient(result)),
                             );
                           } else {
                             final snackBar = SnackBar(

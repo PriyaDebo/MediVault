@@ -107,7 +107,7 @@ class _BodyState extends State<Body> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => BottomNavigationPatient(),
+                                    builder: (_) => BottomNavigationPatient(id),
                                   )
                               );
                             } else {
