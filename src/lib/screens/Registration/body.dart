@@ -144,7 +144,7 @@ class _BodyState extends State<Body> {
                                 style: GoogleFonts.lora(),
                               ),
                               duration: Duration(seconds: 2),
-                              behavior: SnackBarBehavior.floating,
+                                behavior: SnackBarBehavior.floating,
                             );
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
