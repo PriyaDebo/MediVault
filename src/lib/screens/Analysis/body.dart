@@ -41,7 +41,6 @@ class _BodyState extends State<Body> {
                             fontWeight: FontWeight.w400),
                         textAlign: TextAlign.center,
                       ),
-                      Image.asset("assets/images/logowithname.png", height: size.height * 0.15, width: size.height * 0.8,),
                     ]
                 )
             )

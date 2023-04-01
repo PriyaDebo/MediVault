@@ -5,11 +5,11 @@ part 'login_model.g.dart';
 @JsonSerializable()
 
 class LoginModel {
-  String? type;
-  String? id;
+  String? accountType;
+  String? accountId;
   String? password;
 
-  LoginModel(this.type, this.id, this.password);
+  LoginModel(this.accountType, this.accountId, this.password);
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(json);
 

@@ -5,12 +5,13 @@ part 'hospital_model.g.dart';
 @JsonSerializable()
 
 class HospitalModel {
-  String? id;
-  String? name;
+  String? hospitalId;
+  String? hospitalName;
   String? password;
-  String? contact;
+  String? hospitalContact;
+  String? hospitalAddress;
 
-  HospitalModel(this.id, this.name, this.password, this.contact);
+  HospitalModel(this.hospitalId, this.hospitalName, this.password, this.hospitalContact, this.hospitalAddress);
 
   factory HospitalModel.fromJson(Map<String, dynamic> json) => _$HospitalModelFromJson(json);
 

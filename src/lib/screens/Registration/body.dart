@@ -25,7 +25,6 @@ class _BodyState extends State<Body> {
   final TextEditingController passwordController = new TextEditingController();
   final TextEditingController ageController = new TextEditingController();
 
-  final TextEditingController emailController = new TextEditingController();
   final TextEditingController nameController = new TextEditingController();
   final TextEditingController hospitalPasswordController = new TextEditingController();
   final TextEditingController phoneController = new TextEditingController();
@@ -124,10 +123,6 @@ class _BodyState extends State<Body> {
                     final name = nameController.text.trim();
                     final contact = phoneController.text.trim();
                     if (checkValidityHospital(name, password, contact, context)) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => BottomNavigationHospital()),
-                      );
                       final result = await HospitalBl().validRegister(name, password, contact);
                       if (result != "FAIL") {
                         Navigator.pushReplacement(
