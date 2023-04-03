@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:medivault/apis/patient_service.dart';
 
 class PatientBl {
@@ -7,9 +5,9 @@ class PatientBl {
   
   Future<String> validRegister(String name, String password, String age, String gender) async {
     final res = await patientService.registerPatient(name, password, age, gender);
+    print(res.statusCode);
     if (res.statusCode == 200) {
-      final response = jsonDecode(res.body);
-      return response.id.toString();
+      return res.body;
     }
 
     return "FAIL";

@@ -103,7 +103,8 @@ class _BodyState extends State<Body> {
 
                           if(checkValidityPatient(id, password, context)) {
                             final result = await PatientBl().validLogin(id, password);
-                            if (result == "SUCCESS") {
+                            print(result);
+                            if (result != "FAIL") {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

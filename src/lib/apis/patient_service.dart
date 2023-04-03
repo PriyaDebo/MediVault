@@ -7,7 +7,7 @@ import 'package:medivault/models/patient_model.dart';
 
 class PatientService {
 
-  final uriLink = "";
+  final uriLink = "http://10.31.13.81:5000";
   final header = <String, String>{'Content-Type': 'application/json; charset=UTF-8',};
 
   Future<http.Response> registerPatient(String name, String password, String age, String gender) async{
@@ -31,6 +31,7 @@ class PatientService {
       body: jsonEncode(login.toJson()),
     );
 
+    print (response);
     return response;
   }
 }

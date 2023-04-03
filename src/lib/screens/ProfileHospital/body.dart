@@ -60,22 +60,6 @@ class _BodyState extends State<Body> {
                                 ),
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "Name: Medical Hospital",
-                                    style: GoogleFonts.poppins(
-                                        color: kDarkSlateBlue,
-                                        fontSize: height * 0.025,
-                                        fontWeight: FontWeight.w400),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ],
-                            ),
                           ],
                         ),
                       ),

@@ -17,8 +17,8 @@ class ReportBl {
   Future<List<int>> getAnalysis(String patientId) async {
     final res = await reportService.readAnalysis(patientId);
     if (res.statusCode == 200) {
-      final responseBody = jsonDecode(res.body);
-      final analysis = responseBody.binaryAnalysis;
+      // final responseBody = jsonDecode(res.body);
+      final analysis = utf8.encode(res.body);
       return analysis;
     }
 

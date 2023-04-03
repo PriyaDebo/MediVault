@@ -457,7 +457,7 @@ class _BodyState extends State<Body> {
                     ],
                   ),
                 ),
-
+                SizedBox(height: height*0.02,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
