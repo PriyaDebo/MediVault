@@ -60,21 +60,21 @@ flutter pub get
 ```
 	1. Open the file lib/apis/patient_service.dart
 	2. Find the following code in line 9
-	     final uriLink = "http://10.31.13.81:5000";
+	     final uriLink = "http://192.168.129.111:5000";
 	3. Modify it with the ip configuration:
 	     final uriLink = "http://<ip address>:5000;
 ```
 ```
 	1. Open the file lib/apis/hospital_service.dart
 	2. Find the following code in line 9
-	     final uriLink = "http://10.31.13.81:5000";
+	     final uriLink = "http://192.168.129.111:5000";
 	3. Modify it with the ip configuration:
 	     final uriLink = "http://<ip address>:5000;
 ```
 ```
 	1. Open the file lib/apis/report_service.dart
 	2. Find the following code in line 8
-	     final uriLink = "http://10.31.13.81:5000";
+	     final uriLink = "http://192.168.129.111:5000";
 	3. Modify it with the ip configuration:
 	     final uriLink = "http://<ip address>:5000;
 ```
