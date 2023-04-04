@@ -117,7 +117,7 @@ class _BodyState extends State<Body> {
                           if (await _pdfFile.exists()) {
                             if (await checkValidity(widget.id, dateString, _pdfFile, context)) {
                               final file = await getFileBytes(_pdfFile);
-                              final result = await ReportBl().reportUpload(patientId, file, dateString);
+                              final result = await ReportBl().reportUpload(widget.id, file, dateString);
                               if (result == "FAIL") {
                                 final snackBar = SnackBar(
                                   content: Text("Failed to add report", style: GoogleFonts.lora(),),
