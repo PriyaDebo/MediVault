@@ -13,4 +13,21 @@ class ReportBl {
 
     return "FAIL";
   }
+
+  Future<List<int>> getAnalysis(String patientId) async {
+    final res = await reportService.readAnalysis(patientId);
+    print("Status Code: ");
+    print(res.statusCode);
+    if (res.statusCode == 200) {
+      // final responseBody = jsonDecode(res.body);
+      print(res.body);
+      // final analysis = utf8.encode(res.body);
+      final List<dynamic> responseJson = json.decode(res.body);
+      final List<int> analysis = List.from(responseJson.map((e) => e as int));
+      print(analysis);
+      return analysis;
+    }
+
+    return <int>[];
+  }
 }

@@ -26,14 +26,15 @@ class _BodyState extends State<Body> {
   final _formKey = GlobalKey<FormState>();
   late File _pdfFile;
 
-  Future<List<int>?> getFileBytes(File file) async {
+  Future<List<int>> getFileBytes(File file) async {
     try {
       List<int> fileBytes = await file.readAsBytes();
       return fileBytes;
     } catch (e) {
       // Handle any exceptions from file operations
       print('Error reading file: $e');
-      return null;
+      final list = <int>[];
+      return list;
     }
   }
 
@@ -71,7 +72,6 @@ class _BodyState extends State<Body> {
         .of(context)
         .size;
     double height = size.height;
-    double width = size.width;
     return Background(
         child: Scaffold(
             body: Container(
@@ -101,12 +101,13 @@ class _BodyState extends State<Body> {
                           hintText: "Patient Id",
                           icon: Icons.person,
                           onChanged: (value) {},
+                          controller: _patientId,
                           isObscure: false
                       ),
                       SizedBox(height: height * 0.02),
                       RoundButton(
                         text: "Select Date",
-                        press: _openFileExplorer,
+                        press: _showDatePicker,
                       ),
                       SizedBox(height: height * 0.02),
                       RoundButton(
@@ -118,25 +119,28 @@ class _BodyState extends State<Body> {
                         text: "SUBMIT",
                         press: () async {
                           final patientId = _patientId.text.trim();
-                          final file = getFileBytes(_pdfFile);
                           final dateString = date.toString();
-                          if (checkValidityHospital(patientId, dateString, file as List<int>, context)) {
-                            final result = await ReportBl().reportUpload(patientId, file as List<int>, dateString);
-                            if (result == "FAIL") {
-                              final snackBar = SnackBar(
-                                content: Text("Failed to add report", style: GoogleFonts.lora(),),
-                                duration: Duration(seconds: 2),
-                                behavior: SnackBarBehavior.floating,
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            }
-                            else {
-                              final snackBar = SnackBar(
-                                content: Text("Report Added Successfully", style: GoogleFonts.lora(),),
-                                duration: Duration(seconds: 2),
-                                behavior: SnackBarBehavior.floating,
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          if (await _pdfFile.exists()) {
+                            print("File $_pdfFile");
+                            if (await checkValidityHospital(patientId, dateString, _pdfFile, context)) {
+                              final file = await getFileBytes(_pdfFile);
+                              final result = await ReportBl().reportUpload(patientId, file, dateString);
+                              if (result == "FAIL") {
+                                final snackBar = SnackBar(
+                                  content: Text("Failed to add report", style: GoogleFonts.lora(),),
+                                  duration: Duration(seconds: 2),
+                                  behavior: SnackBarBehavior.floating,
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
+                              else {
+                                final snackBar = SnackBar(
+                                  content: Text("Report Added Successfully", style: GoogleFonts.lora(),),
+                                  duration: Duration(seconds: 2),
+                                  behavior: SnackBarBehavior.floating,
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
                             }
                           }
                         },
@@ -149,12 +153,12 @@ class _BodyState extends State<Body> {
     );
   }
 
-  bool checkValidityHospital(String patientId, String date, List<int> file,
-      context) {
+  Future<bool> checkValidityHospital(String patientId, String date, File file, context) async {
+    print("checking validity");
     if (patientId.isEmpty) {
       final snackBar = SnackBar(
         content: Text(
-          "Patient ID Required",
+          "Patient MediVault ID Required.",
           style: GoogleFonts.lora(),
         ),
         duration: Duration(seconds: 2),
@@ -165,7 +169,7 @@ class _BodyState extends State<Body> {
     } else if (date.isEmpty) {
       final snackBar = SnackBar(
         content: Text(
-          "Date required",
+          "Date required.",
           style: GoogleFonts.lora(),
         ),
         duration: Duration(seconds: 2),
@@ -173,7 +177,8 @@ class _BodyState extends State<Body> {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       return false;
-    } else if (file.isEmpty) {
+    } else if (!await file.exists()) {
+      print("It exists");
       final snackBar = SnackBar(
         content: Text(
           "Please attach file.",
@@ -183,6 +188,8 @@ class _BodyState extends State<Body> {
         behavior: SnackBarBehavior.floating,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      final fileNex = await getFileBytes(_pdfFile);
+      print(fileNex);
       return false;
     }
     return true;

@@ -8,16 +8,18 @@ part of 'hospital_model.dart';
 
 HospitalModel _$HospitalModelFromJson(Map<String, dynamic> json) =>
     HospitalModel(
-      json['id'] as String?,
-      json['name'] as String?,
+      json['hospitalId'] as String?,
+      json['hospitalName'] as String?,
       json['password'] as String?,
-      json['contact'] as String?,
+      json['hospitalContact'] as String?,
+      json['hospitalAddress'] as String?,
     );
 
 Map<String, dynamic> _$HospitalModelToJson(HospitalModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
+      'hospitalId': instance.hospitalId,
+      'hospitalName': instance.hospitalName,
       'password': instance.password,
-      'contact': instance.contact,
+      'hospitalContact': instance.hospitalContact,
+      'hospitalAddress': instance.hospitalAddress,
     };
