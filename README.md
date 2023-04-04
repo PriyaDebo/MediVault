@@ -96,3 +96,7 @@ lib/
 |- main.dart
 test/
 ```
+
+## Screenshots:
+
+<img src="/Screenshots/SplashScreen.png" width="250"/> <img src="/Screenshots/Onboarding1.png" width="250"/> <img src="/Screenshots/Onboarding2.png" width="250"/> <img src="/Screenshots/SelectAccount.png" width="250"/>  <img src="/Screenshots/PatientRegistration.png" width="250"/> <img src="/Screenshots/HospitalRegistration.png" width="250"/> <img src="/Screenshots/Login.png" width="250"/> <img src="/Screenshots/PatientHome.png" width="250"/> <img src="/Screenshots/HospitalHome.png" width="250"/> <img src="/Screenshots/Profile.png" width="250"/> <img src="/Screenshots/Analysis.png" width="250"/>
