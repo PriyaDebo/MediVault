@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:medivault/models/hospital_model.dart';
 import 'package:medivault/models/login_model.dart';
 
-
 class HospitalService {
 
   final uriLink = "http://10.31.13.81:5000";
