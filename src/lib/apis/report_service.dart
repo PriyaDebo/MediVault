@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -5,7 +6,7 @@ import 'package:medivault/models/report_model.dart';
 
 class ReportService {
 
-  final uriLink = "http://10.31.13.81:5000";
+  final uriLink = "http://192.168.129.111:5000";
   final header = <String, String>{'Content-Type': 'application/json; charset=UTF-8',};
 
   Future<http.Response> uploadReport(String patientId, List<int> report, String date) async {
@@ -25,8 +26,12 @@ class ReportService {
     final response = await http.get(
       Uri.parse(uri),
       headers: header,
-    );
+    ).timeout(Duration(seconds: 10000000), onTimeout: () {
+      throw TimeoutException('The request timed out.');
+    });
 
+    print(response.headers);
+    print(response.statusCode);
     return response;
   }
 }

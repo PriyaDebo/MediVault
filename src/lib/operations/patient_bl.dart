@@ -5,7 +5,6 @@ class PatientBl {
   
   Future<String> validRegister(String name, String password, String age, String gender) async {
     final res = await patientService.registerPatient(name, password, age, gender);
-    print(res.statusCode);
     if (res.statusCode == 200) {
       return res.body;
     }

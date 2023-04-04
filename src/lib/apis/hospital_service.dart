@@ -6,7 +6,7 @@ import 'package:medivault/models/login_model.dart';
 
 class HospitalService {
 
-  final uriLink = "http://10.31.13.81:5000";
+  final uriLink = "http://192.168.129.111:5000";
   final header = <String, String>{'Content-Type': 'application/json; charset=UTF-8',};
 
   Future<http.Response> registerHospital(String name, String password, String contact) async {
